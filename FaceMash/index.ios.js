@@ -5,25 +5,28 @@
 'use strict';
 
 var React = require('react-native');
+var FaceMashTab = require('./tabs/FaceMash');
 var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
   TabBarIOS,
+  StatusBarIOS,
   Image
 } = React;
 
 var FaceMash = React.createClass({
   getInitialState() {
     return {
-      selectedTab: 'faceMash'
+      selectedTab: 'facemash'
     }
   },
   changeTab(tabName) {
+    StatusBarIOS.setStyle(tabName === 'facemash' ? 1 : 0);
     this.setState({
       selectedTab: tabName
-    })
+    });
   },
   render: function() {
     return (
@@ -33,9 +36,7 @@ var FaceMash = React.createClass({
           icon={ require('image!facemash')}
           onPress={ () => this.changeTab('facemash') }
           selected={ this.state.selectedTab === 'facemash'} >
-          <View style={styles.pageView}>
-            <Text>FaceMash</Text>
-          </View>
+          <FaceMashTab />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Messages"
